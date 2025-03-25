@@ -1,0 +1,118 @@
+﻿<!-- Views/Home/Index.cshtml -->
+@{
+    ViewData["Title"] = "Books Application";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-12 mb-3">
+            <div class="input-group">
+                <input type="text" id="searchInput" class="form-control" placeholder="Search subjects...">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" id="searchButton">Search</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 text-right mb-3">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addDataModal">
+                Add New Data
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Left division with subjects -->
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Subjects</h5>
+                </div>
+                <div class="card-body subjects-container" style="height: 500px; overflow-y: auto; position: relative;">
+                    <div id="subjectsList" class="list-group">
+                        <!-- Subjects will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right division with subtopics -->
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0" id="selectedSubjectTitle">Subtopics</h5>
+                </div>
+                <div class="card-body">
+                    <div id="subtopicsList">
+                        <!-- Subtopics will be loaded here -->
+                        <p class="text-center text-muted">Select a subject to view its subtopics</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for adding new data -->
+<div class="modal fade" id="addDataModal" tabindex="-1" role="dialog" aria-labelledby="addDataModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addDataModalLabel">Add New Subject with Subtopics</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="newDataForm">
+                    <div class="form-group">
+                        <label for="subjectName">Subject Name</label>
+                        <input type="text" class="form-control" id="subjectName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Subtopics</label>
+                        <div id="subtopicsContainer">
+                            <div class="input-group mb-2">
+                                <input type="text" class="form-control subtopic-input" placeholder="Subtopic name" required>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-danger remove-subtopic" type="button">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-outline-primary btn-sm mt-2" id="addSubtopicField">
+                            Add Another Subtopic
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveDataBtn">Save Data</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for editing subjects -->
+<div class="modal fade" id="editSubjectModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Subject</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="editSubjectId">
+                <div class="form-group">
+                    <label for="editSubjectName">Subject Name</label>
+                    <input type="text" class="form-control" id="editSubjectName" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveEditSubject">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
